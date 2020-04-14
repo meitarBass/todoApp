@@ -13,6 +13,7 @@
 		A9981D6424466AF900438E63 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A9981D6224466AF900438E63 /* Main.storyboard */; };
 		A9981D6624466AFD00438E63 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A9981D6524466AFD00438E63 /* Assets.xcassets */; };
 		A9981D6924466AFD00438E63 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A9981D6724466AFD00438E63 /* LaunchScreen.storyboard */; };
+		A9981D74244671BA00438E63 /* CategoryVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9981D73244671BA00438E63 /* CategoryVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		A9981D6524466AFD00438E63 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A9981D6824466AFD00438E63 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A9981D6A24466AFD00438E63 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A9981D73244671BA00438E63 /* CategoryVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,15 +58,40 @@
 		A9981D5B24466AF900438E63 /* todoApp */ = {
 			isa = PBXGroup;
 			children = (
+				A9981D7024466DCA00438E63 /* Model */,
+				A9981D7124466DCE00438E63 /* View */,
+				A9981D7224466DD300438E63 /* Controller */,
 				A9981D5C24466AF900438E63 /* AppDelegate.swift */,
 				A9981D5E24466AF900438E63 /* SceneDelegate.swift */,
-				A9981D6024466AF900438E63 /* HomeVC.swift */,
 				A9981D6224466AF900438E63 /* Main.storyboard */,
 				A9981D6524466AFD00438E63 /* Assets.xcassets */,
 				A9981D6724466AFD00438E63 /* LaunchScreen.storyboard */,
 				A9981D6A24466AFD00438E63 /* Info.plist */,
 			);
 			path = todoApp;
+			sourceTree = "<group>";
+		};
+		A9981D7024466DCA00438E63 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		A9981D7124466DCE00438E63 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		A9981D7224466DD300438E63 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				A9981D6024466AF900438E63 /* HomeVC.swift */,
+				A9981D73244671BA00438E63 /* CategoryVC.swift */,
+			);
+			path = Controller;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -140,6 +167,7 @@
 			files = (
 				A9981D6124466AF900438E63 /* HomeVC.swift in Sources */,
 				A9981D5D24466AF900438E63 /* AppDelegate.swift in Sources */,
+				A9981D74244671BA00438E63 /* CategoryVC.swift in Sources */,
 				A9981D5F24466AF900438E63 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
