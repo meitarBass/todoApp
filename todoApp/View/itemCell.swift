@@ -18,6 +18,6 @@ class itemCell: UITableViewCell {
     }
     
     func configureCell(item: Item) {
-//        itemLabel.text = item
+        itemLabel.text = item.title
     }
 }

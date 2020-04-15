@@ -6,11 +6,11 @@
 //  Copyright © 2020 Meitar Basson. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 struct Category {
     
-    let imageName: String?
+    var image: UIImage?
     let title: String
     
 }

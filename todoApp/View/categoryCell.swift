@@ -20,8 +20,8 @@ class categoryCell: UITableViewCell {
     }
     
     func configureCell(category: Category) {
-        if let image = category.imageName {
-            cellImage.image = UIImage(named: image)
+        if let image = category.image {
+            cellImage.image = image
         }
         cellLabel.text = category.title
     }
