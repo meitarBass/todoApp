@@ -45,6 +45,7 @@ class HomeVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UIIm
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        selectedCategory = categories[indexPath.row]
         performSegue(withIdentifier: "toCategoryVC", sender: nil)
     }
     

@@ -11,5 +11,10 @@ import Foundation
 struct Item {
     
     let title: String
+    var wasDone: Bool = false
+    
+    mutating func changeCheckmarkSign() {
+        wasDone = !wasDone
+    }
     
 }

@@ -22,7 +22,7 @@ class CategoryVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         itemTable.delegate = self
         itemTable.dataSource = self
         
-        navigationController?.title = category?.title
+        navigationItem.title = category?.title
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -38,10 +38,12 @@ class CategoryVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if tableView.cellForRow(at: indexPath)?.accessoryType == .checkmark {
-            tableView.cellForRow(at: indexPath)?.accessoryType = .none
-        } else {
+        items[indexPath.row].changeCheckmarkSign()
+        
+        if items[indexPath.row].wasDone {
             tableView.cellForRow(at: indexPath)?.accessoryType = .checkmark
+        } else {
+            tableView.cellForRow(at: indexPath)?.accessoryType = .none
         }
     }
     
@@ -69,3 +71,27 @@ class CategoryVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     }
     
 }
+
+//// Firebase Section for upload images online
+//// Data in memory
+//let data = Data()
+//
+//// Create a reference to the file you want to upload
+//let riversRef = storageRef.child("images/rivers.jpg")
+//
+//// Upload the file to the path "images/rivers.jpg"
+//let uploadTask = riversRef.putData(data, metadata: nil) { (metadata, error) in
+//  guard let metadata = metadata else {
+//    // Uh-oh, an error occurred!
+//    return
+//  }
+//  // Metadata contains file metadata such as size, content-type.
+//  let size = metadata.size
+//  // You can also access to download URL after upload.
+//  riversRef.downloadURL { (url, error) in
+//    guard let downloadURL = url else {
+//      // Uh-oh, an error occurred!
+//      return
+//    }
+//  }
+//}
