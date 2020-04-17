@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import FirebaseFirestore
+import FirebaseStorage
 
 class HomeVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
@@ -14,6 +16,9 @@ class HomeVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UIIm
     
     lazy var categories: [Category] = [Category]()
     var selectedCategory: Category?
+    
+    let data = Data()
+    
     
     let alert = UIAlertController(title: "Add New Category", message: "Please enter a new category", preferredStyle: .alert)
     var image: UIImage?
@@ -26,6 +31,17 @@ class HomeVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UIIm
         imagePicker.delegate = self
         categoryTable.delegate = self
         categoryTable.dataSource = self
+        
+        data.getCategoriesFromDB { (category) in
+            guard let categoriesArr = category as? [Category] else { return }
+            self.categories = categoriesArr
+            for (index, _) in self.categories.enumerated() {
+                self.data.downloadImageFromStorage(imageURL: self.categories[index].imageUrl, completion: { (img) in
+                    self.categories[index].image = img
+                    self.categoryTable.reloadData()
+                })
+            }
+        }
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -41,12 +57,27 @@ class HomeVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UIIm
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 250
+        return 150
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         selectedCategory = categories[indexPath.row]
         performSegue(withIdentifier: "toCategoryVC", sender: nil)
+    }
+    
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            print("delete")
+            data.deleteCategoryFromDB(categoriesArr: categories, categoryToDelete: indexPath.row) { (categoriesArray) in
+                self.categories = categoriesArray
+                print(self.categories)
+                self.categoryTable.reloadData()
+            }
+        }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -61,7 +92,13 @@ class HomeVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UIIm
         
         let action = UIAlertAction(title: "Add New Task", style: .default) { _ in
             guard let image = self.image, let text = textField.text else {return}
-            let category = Category(image: image, title: text)
+            var category = Category(title: text, docuemntID: nil, imageUrl: nil, image: image)
+            self.data.saveImageToStorage(category: category, image: image) { url  in
+                category.imageUrl = url
+                self.data.saveCategoryToDB(category: category) { documentID in
+                    category.docuemntID = documentID
+                }
+            }
             self.categories.append(category)
             self.categoryTable.reloadData()
             textField.text = ""
@@ -88,7 +125,4 @@ class HomeVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UIIm
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         self.dismiss(animated: true, completion: nil)
     }
-    
 }
-
-

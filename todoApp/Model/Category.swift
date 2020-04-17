@@ -10,7 +10,9 @@ import UIKit
 
 struct Category {
     
-    var image: UIImage?
     let title: String
+    var docuemntID: String?
+    var imageUrl: String?
+    var image: UIImage?
     
 }
